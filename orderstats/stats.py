@@ -20,3 +20,17 @@ def total_order_value(orders: Sequence[Order]) -> float:
         The sum of every order value, or ``0.0`` when ``orders`` is empty.
     """
     return float(sum(order.value for order in orders))
+
+
+def average_order_value(orders: Sequence[Order]) -> float:
+    """Return the mean value of the supplied orders.
+
+    Args:
+        orders: The orders to average. May be empty.
+
+    Returns:
+        The mean order value, or ``0.0`` when ``orders`` is empty.
+    """
+    if not orders:
+        return 0.0
+    return total_order_value(orders) / len(orders)

@@ -1,7 +1,7 @@
 """Tests for :mod:`orderstats.stats`."""
 
 from orderstats.models import Order
-from orderstats.stats import total_order_value
+from orderstats.stats import average_order_value, total_order_value
 
 
 def _orders(*values: float) -> list[Order]:
@@ -18,3 +18,11 @@ def test_total_order_value_sums_every_order() -> None:
 
 def test_total_order_value_is_zero_without_orders() -> None:
     assert total_order_value([]) == 0.0
+
+
+def test_average_order_value_returns_the_mean() -> None:
+    assert average_order_value(_orders(10.0, 20.0, 30.0)) == 20.0
+
+
+def test_average_order_value_is_zero_without_orders() -> None:
+    assert average_order_value([]) == 0.0

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orderstats"
+version = "0.1.0"
+description = "Minimal order-statistics library used by the Gitar x SonarQube edge-case demo."
+requires-python = ">=3.9"
+dependencies = []
+
+[tool.setuptools]
+packages = ["orderstats"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+# Deliberately `include` and not `source = ["orderstats"]`. With `source`,
+# coverage roots the report at that directory and emits filenames like
+# `stats.py`, which SonarQube cannot match against `orderstats/stats.py` --
+# the result is a silent 0% coverage on new code. `include` keeps paths
+# repo-relative. Verified: coverage.xml must contain `orderstats/stats.py`.
+include = ["orderstats/*"]
+branch = true
+relative_files = true
+
+[tool.coverage.report]
+show_missing = true

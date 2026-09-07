@@ -31,4 +31,6 @@ def average_order_value(orders: Sequence[Order]) -> float:
     Returns:
         The mean order value, or ``0.0`` when ``orders`` is empty.
     """
+    if not orders:
+        return 0.0
     return total_order_value(orders) / len(orders)
